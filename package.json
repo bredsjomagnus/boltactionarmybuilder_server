@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run lint & nodemon app.js",
+    "lint": "./node_modules/.bin/eslint ./api/**/*.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.12",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-google": "^0.9.1"
+  }
+}
