@@ -35,7 +35,7 @@ module.exports = (router) => {
             .catch((err) => res.status(500)
                 .json({
                     message: 'Error getting army by id',
-                    error: err
+                    error: err,
                 }));
     });
 
@@ -61,5 +61,38 @@ module.exports = (router) => {
                     message: 'Error deleting armygroup',
                     error: err,
                 }));
+    });
+
+    router.put('/army/:id', (req, res) => {
+        // console.log('api > router > army > put> req.body >\n', req.body);
+        console.log('api > router > army > put> req.params._id >\n', req.params.id);
+        let qry = {
+            _id: req.params.id,
+        };
+        let doc = {
+            nationality: req.body.nationality,
+            type: req.body.type,
+            category: req.body.category,
+            title: req.body.title,
+            experience: req.body.experience,
+            description: req.body.description,
+            cost: req.body.cost,
+            weapons: req.body.weapons,
+            damagevalue: req.body.damagevalue,
+            composition: {
+                description: req.body.composition.description,
+                size: req.body.composition.size,
+            },
+            options: req.body.options,
+            special_rules: req.body.special_rules,
+        };
+
+        console.log('api > router > army > put > doc >\n', doc);
+        Army.updateOne(qry, doc, (err, respRaw) => {
+            if (err) {
+                return console.log(err);
+            }
+            res.status(200).json(respRaw);
+        });
     });
 };

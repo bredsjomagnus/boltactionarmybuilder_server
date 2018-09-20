@@ -47,7 +47,7 @@ module.exports = (router) => {
     });
 
     router.put('/user/:id', (req, res) => {
-        console.log(req.body);
+        // console.log(req.body);
         let qry = {
             id: req.params.id,
         };
