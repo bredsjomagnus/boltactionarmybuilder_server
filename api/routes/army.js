@@ -1,8 +1,13 @@
 const Army = require('../../models/army');
 
 module.exports = (router) => {
-    router.get('/army/:nationality', (req, res) => {
-        Army.findById(req.params.nationality).exec()
+    router.get('/army/nationality/:nationality', (req, res) => {
+        let nation = req.params.nationality;
+        nation = nation.toLowercase();
+        // console.log('nation: ', typeof nation);
+        Army.find({
+                'nationality': nation,
+            }).exec()
             .then((docs) => res.status(200)
                 .json(docs))
             .catch((err) => res.status(500)
@@ -12,15 +17,49 @@ module.exports = (router) => {
                 }));
     });
 
+    router.get('/army', (req, res) => {
+        Army.find({}).exec()
+            .then((docs) => res.status(200)
+                .json(docs))
+            .catch((err) => res.status(500)
+                .json({
+                    message: 'Error finding all armies',
+                    error: err,
+                }));
+    });
+
+    router.get('/army/:id', (req, res) => {
+        Army.findById(req.params.id).exec()
+            .then((docs) => res.status(200)
+                .json(docs))
+            .catch((err) => res.status(500)
+                .json({
+                    message: 'Error getting army by id',
+                    error: err
+                }));
+    });
+
     router.post('/army', (req, res) => {
-        console.log('req.body: ', req.body);
+        // console.log('req.body: ', req.body);
         let army = new Army(req.body);
         army.save((err, army) => {
             if (err) {
                 return console.log(err);
             }
-            console.log('Added armygroup');
+            // console.log('Added armygroup');
             res.status(200).json(army);
         });
+    });
+
+    router.delete('/army/delete/:id', (req, res) => {
+        // console.log('\nreq.params.id: ', req.params.id + '\n');
+        Army.findById({_id: req.params.id}).remove().exec()
+            .then((docs) => res.status(200)
+                .json(docs))
+            .catch((err) => res.status(500)
+                .json({
+                    message: 'Error deleting armygroup',
+                    error: err,
+                }));
     });
 };
