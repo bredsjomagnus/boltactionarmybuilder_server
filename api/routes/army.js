@@ -65,7 +65,7 @@ module.exports = (router) => {
 
     router.put('/army/:id', (req, res) => {
         // console.log('api > router > army > put> req.body >\n', req.body);
-        console.log('api > router > army > put> req.params._id >\n', req.params.id);
+        // console.log('api > router > army > put> req.params._id >\n', req.params.id);
         let qry = {
             _id: req.params.id,
         };
