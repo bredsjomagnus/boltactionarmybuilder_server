@@ -3,7 +3,7 @@ const Army = require('../../models/army');
 module.exports = (router) => {
     router.get('/army/nationality/:nationality', (req, res) => {
         let nation = req.params.nationality;
-        nation = nation.toLowercase();
+        // nation = nation.toLowercase();
         // console.log('nation: ', typeof nation);
         Army.find({
                 'nationality': nation,
@@ -81,6 +81,7 @@ module.exports = (router) => {
                 description: req.body.composition.description,
                 size: req.body.composition.size,
             },
+            maxsize: req.body.maxsize,
             options: req.body.options,
             special_rules: req.body.special_rules,
         };

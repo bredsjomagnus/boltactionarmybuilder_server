@@ -59,6 +59,9 @@ let armySchema = new Schema({
             type: Number,
         },
     },
+    maxsize: {
+        type: Number,
+    },
     weapons: {
         type: String,
         required: true,
