@@ -5,6 +5,9 @@ let option = new Schema({
     description: {
         type: String,
     },
+    optionkey: {
+        type: String,
+    },
     cost: {
         type: Number,
     },
@@ -18,6 +21,9 @@ let option = new Schema({
 
 let specialrule = new Schema({
     rule: {
+        type: String,
+    },
+    rulekey: {
         type: String,
     },
 });
